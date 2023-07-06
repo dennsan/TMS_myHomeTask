@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class lessons3 {
     public static void main(String[] args) {
         //1. used switch
-        /*
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter number month!");
         int month = sc.nextInt();
@@ -112,6 +111,6 @@ public class lessons3 {
                 System.out.printf("%3d", i * j);
             }
             System.out.println(" ");
-        }*/
+        }
     }
 }
