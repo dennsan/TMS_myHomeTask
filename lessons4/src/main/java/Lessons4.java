@@ -8,14 +8,14 @@ public class Lessons4 {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter number:");
         int num = sc.nextInt();
-        int res = 0;
+        boolean res = false;
         int[] arr = {12, 232, 433, 4, 54, 454, 32, 45, 67, 2, 6, 9,};
         for (int i : arr) {
             if (i == num) {
-                res++;
+                res = true;
             }
         }
-        if (res > 0) {
+        if (res) {
             System.out.println("Number found");
         } else {
             System.out.println("Number not found");
@@ -59,18 +59,17 @@ public class Lessons4 {
             arr[i] = Math.random();
         }
         System.out.println(Arrays.toString(arr));
-        double element = arr[0];
-        double max = 0;
-        double min = 0;
+        double max = arr[0];
+        double min = arr[0];
         for (double el1 : arr) {
-            if (el1 > element) {
+            if (el1 > max) {
                 max = el1;
             }
         }
         System.out.println(max);
 
         for (double el1 : arr) {
-            if (el1 < element) {
+            if (el1 < min) {
                 min = el1;
             } else {
                 min = element;
