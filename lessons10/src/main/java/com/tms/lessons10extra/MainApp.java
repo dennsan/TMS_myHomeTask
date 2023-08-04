@@ -1,51 +1,44 @@
 package com.tms.lessons10extra;
 
-import java.io.*;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.LineNumberReader;
 import java.util.Scanner;
 
 public class MainApp {
     public static void main(String[] args) {
 
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter path:");
-            String pathFile = sc.next();
-            try {
-                LineNumberReader reader = new LineNumberReader(new FileReader(pathFile));
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter path:");
+        String pathName = sc.next(); // text.txt
 
-                OutputStream validWriter = new FileOutputStream("C:\\Users\\Kim\\validDoc.txt", true);
+        try {
 
-                OutputStream notValidWriter = new FileOutputStream("C:\\Users\\Kim\\notValidDoc.txt",true);
+            LineNumberReader reader = new LineNumberReader(new FileReader(pathName));
+            FileWriter validWriter = new FileWriter("validDoc.txt");
+            FileWriter notValidWriter = new FileWriter("notValidDoc.txt");
+            String read;
 
-                String read = reader.readLine();
-
-                while (read != null) {
-
-                    if (read != null && read.length() == 15 && (read.startsWith("docnum") || read.startsWith("contract"))) {
-                        System.out.println("Document is valid");
-                        char [] val = read.toCharArray();
-                        for (char ch : val){
-                        validWriter.write(ch);
-
-                        }
-
-                        validWriter.write('\n');
-
-                    } else {
-                        char [] val = read.toCharArray();
-                        for (char ch : val){
-                            notValidWriter.write(ch);
-                        }
-
-                        notValidWriter.write('\n');
-
-                        System.out.println("Document is not valid");
-                    }
-
-                    read = reader.readLine();
+            while ((read = reader.readLine()) != null) {
+                if (read.length() == 15 && (read.startsWith("docnum") || read.startsWith("contract"))) {
+                    validWriter.write(read + "\n");
+                    System.out.println("Document is valid");
+                } else if (read.length() != 15) {
+                    notValidWriter.write(read + " Length number is not valid\n");
+                    System.out.println("Document is not valid");
+                } else if (!(read.startsWith("docnum") || read.startsWith("contract"))) {
+                    notValidWriter.write(read + " Doc name is not valid\n");
+                    System.out.println("Document is not valid");
                 }
-            } catch (Exception ex) {
-
-                System.out.println("Error");
             }
+
+            reader.close();
+            validWriter.close();
+            notValidWriter.close();
+
+        } catch (Exception exp) {
+            System.out.println("Error");
         }
-   }
+
+    }
+}

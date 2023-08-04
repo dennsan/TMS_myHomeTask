@@ -16,7 +16,7 @@ public class MainApp {
 
             while (read != null) {
 
-                if (read != null && read.length() == 15 && (read.startsWith("docnum") || read.startsWith("contract"))) {
+                if (read.length() == 15 && (read.startsWith("docnum") || read.startsWith("contract"))) {
                     System.out.println("Document is valid");
                 } else {
                     System.out.println("Document is not valid");
