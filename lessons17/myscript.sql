@@ -100,15 +100,22 @@ INSERT INTO persons_hobby (persons_id, hobby_id) VALUES (1, 1),
 
 DELETE FROM persons_hobby;
 
-SELECT * FROM persons WHERE birthday > '1995-01-01';
+SELECT * FROM persons WHERE birthday < '1995-01-01';
 
 SELECT sex, count(*) FROM persons GROUP BY sex;
 
-SELECT username, hobbyname FROM persons JOIN persons_hobby ph on persons.id = ph.persons_id join hobby h on h.id = ph.hobby_id;
+SELECT username, hobbyname FROM persons
+                                    JOIN persons_hobby ph on persons.id = ph.persons_id
+                                    join hobby h on h.id = ph.hobby_id;
 
-SELECT username, count(*) FROM persons JOIN persons_hobby ph on persons.id = ph.persons_id join hobby h on h.id = ph.hobby_id group by username;
+SELECT username, count(*) FROM persons
+                                   JOIN persons_hobby ph on persons.id = ph.persons_id
+                                   join hobby h on h.id = ph.hobby_id group by username
+having count(*) > 1;
 
-SELECT type, count(*) FROM hobby join type_hobby th on th.id = hobby.hobby_id group by type;
+SELECT type, count(*) FROM hobby
+                               join type_hobby th on th.id = hobby.hobby_id group by type;
 
-SELECT hobbyname, type FROM hobby join type_hobby th on th.id = hobby.hobby_id;
+SELECT hobbyname, type FROM hobby
+                                join type_hobby th on th.id = hobby.hobby_id;
 
