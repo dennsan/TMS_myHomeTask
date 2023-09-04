@@ -28,7 +28,10 @@ public class CityServiceImpl implements CityService {
     @Override
     public void deleteCity(Integer idCity) {
         PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatementStudent = null;
         try {
+            preparedStatementStudent=connection.prepareStatement("update student set city_id = null where city_id = (?)");
+            preparedStatementStudent.setInt(1, idCity);
             preparedStatement = connection.prepareStatement("delete from city where id = (?)");
             preparedStatement.setInt(1, idCity);
             preparedStatement.execute();

@@ -5,6 +5,8 @@ import org.tms.lessons18.config.ConfigConnection;
 import org.tms.lessons18.service.UserService;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
@@ -27,23 +29,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void printInfo() {
+    public List<User> printInfo() throws SQLException {
 
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from student");
-            boolean next = resultSet.next();
-            while (next) {
-                int id = resultSet.getInt(1);
-                String name = resultSet.getString(2);
-                String sex = resultSet.getString(3);
-                String date = resultSet.getString(4);
-                System.out.println(id + " " + name + " " + sex + " " + date);
-                next = resultSet.next();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select id, name_student, sex, birthday from student");
+        return createListUser(resultSet);
+    }
+
+    private List<User> createListUser(ResultSet resultSet) throws SQLException {
+
+        List<User> userList = new ArrayList<>();
+
+        while (resultSet.next()) {
+
+            int id = resultSet.getInt(1);
+            String name = resultSet.getString(2);
+            String sex = resultSet.getString(3);
+            String date = resultSet.getString(4);
+
+            User user = new User(id, name, sex, date);
+            userList.add(user);
         }
+        return userList;
     }
 
 }

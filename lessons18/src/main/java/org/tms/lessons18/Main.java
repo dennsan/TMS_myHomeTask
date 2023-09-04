@@ -2,8 +2,11 @@ package org.tms.lessons18;
 
 import org.tms.lessons18.service.impl.UserServiceImpl;
 
+import java.sql.SQLException;
+import java.util.List;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         User user = new User("Ivan", "men", "1999-05-03");
         User user1 = new User("Polina", "women", "1995-01-14");
         User user2 = new User("Petr", "men", "1997-04-09");
@@ -34,7 +37,8 @@ public class Main {
         userService.save(user11);
         userService.save(user12);
 
-        userService.printInfo();
+        List<User> userList = userService.printInfo();
+        System.out.println(userList);
 
 
     }

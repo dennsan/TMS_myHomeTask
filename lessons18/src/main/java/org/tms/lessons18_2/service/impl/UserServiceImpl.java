@@ -5,6 +5,8 @@ import org.tms.lessons18_2.config.ConfigConnection;
 import org.tms.lessons18_2.service.UserService;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
@@ -28,25 +30,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void printInfo() {
+    public List<User> printInfo() throws SQLException {
 
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select student.id, name_student, sex, birthday,name_city from student " +
-                    "join city C on student.city_id = C.id order by student.id");
-            boolean next = resultSet.next();
-            while (next) {
-                int id = resultSet.getInt(1);
-                String name = resultSet.getString(2);
-                String sex = resultSet.getString(3);
-                String date = resultSet.getString(4);
-                String city = resultSet.getString(5);
-                System.out.println(id + " " + name + " " + sex + " " + date + " " + city);
-                next = resultSet.next();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select student.id, name_student, sex, birthday,name_city from student " +
+                "left join city C on student.city_id = C.id");
+        return createListUser(resultSet);
+    }
+
+    private List<User> createListUser(ResultSet resultSet) throws SQLException {
+
+        List<User> userList = new ArrayList<>();
+
+        while (resultSet.next()) {
+
+            int id = resultSet.getInt(1);
+            String name = resultSet.getString(2);
+            String sex = resultSet.getString(3);
+            String date = resultSet.getString(4);
+            String city = resultSet.getString(5);
+
+            User user = new User(id, name, sex, date, city);
+            userList.add(user);
         }
+        return userList;
     }
 
     @Override
