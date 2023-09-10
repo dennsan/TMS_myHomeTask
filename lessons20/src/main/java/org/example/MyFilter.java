@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebFilter(urlPatterns = "/home")
-public class MySecondServlet implements Filter {
+public class MyFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig)  {
 
     }
 
@@ -21,7 +21,7 @@ public class MySecondServlet implements Filter {
         Cookie[] cookies = req.getCookies();
         for (Cookie c : cookies
         ) {
-            if (c.getName().equals("ke1y")) {
+            if (c.getName().equals("key")) {
                 chain.doFilter(request, response);
             }else {
                 resp.getWriter().println("Error");
