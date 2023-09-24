@@ -1,6 +1,4 @@
-<%@ page import="java.util.List" %>
-<%@ page import="org.tms.lessons24.Book" %>
-<%@ page import="org.tms.lessons24.Database" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -35,7 +33,10 @@
     <br>
     <input type="submit" value="Add">
 </form>
+
+
 <table>
+
     <tr>
         <th>Author</th>
         <th>Title</th>
@@ -43,15 +44,24 @@
     </tr>
 
     <c:forEach items="${books}" var="book">
-        <tr>
-            <td>${book.getAuthor()}</td>
-            <td>${book.getTitle()}</td>
-            <td>${book.getCategory()}</td>
-        </tr>
+
+        <form action="/delete" method="post">
+
+            <tr>
+                <td>${book.getAuthor()}</td>
+                <td>${book.getTitle()}</td>
+                <td>${book.getCategory()}</td>
+                <td>
+                    <input type="hidden" name="deleteId" value=${book.getId()}>
+                    <input type="submit" value="Delete">
+                </td>
+            </tr>
+
+        </form>
+
     </c:forEach>
 
 </table>
-
 
 </body>
 </html>

@@ -6,23 +6,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+import java.util.UUID;
 
-@WebServlet("/search")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/delete")
+public class DeleteServlet extends HttpServlet {
     private final Database database = new Database();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String author = req.getParameter("author");
-        List<Book> books = database.getByAuthor(author);
 
-        req.setAttribute("books", books);
-        req.getRequestDispatcher("/home").forward(req, resp);
+        String deleteId = req.getParameter("deleteId");
+        if (deleteId!=null && !deleteId.isBlank()){
+            UUID uuid = UUID.fromString(deleteId);
+            database.delete(uuid);
+        }
+
+        req.getRequestDispatcher("/home").forward(req,resp);
 
     }
-
-
 }
-
