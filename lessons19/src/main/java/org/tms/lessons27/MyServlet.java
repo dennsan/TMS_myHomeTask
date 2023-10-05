@@ -1,4 +1,4 @@
-package org.example;
+package org.tms.lessons27;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
