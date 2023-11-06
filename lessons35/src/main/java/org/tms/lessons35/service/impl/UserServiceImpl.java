@@ -7,14 +7,12 @@ import org.tms.lessons35.entity.TaskEntity;
 import org.tms.lessons35.entity.UserEntity;
 import org.tms.lessons35.service.UserService;
 
-import java.util.List;
-
 public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(UserEntity user) {
         Session session = HibernateConfig.create();
         Transaction transaction = session.beginTransaction();
-            session.save(user);
+        session.save(user);
         transaction.commit();
         session.close();
     }
@@ -23,8 +21,7 @@ public class UserServiceImpl implements UserService {
     public void updateUser(UserEntity user) {
         Session session = HibernateConfig.create();
         Transaction transaction = session.beginTransaction();
-
-            session.update(user);
+        session.update(user);
         transaction.commit();
         session.close();
     }
@@ -42,7 +39,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteAllUsers() {
+
         setNullForUser();
+
         Session session = HibernateConfig.create();
         Transaction transaction = session.beginTransaction();
         session.createQuery("delete from UserEntity")
@@ -62,16 +61,10 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public void setNullForUser(){
+    public void setNullForUser() {
         Session session = HibernateConfig.create();
         Transaction transaction = session.beginTransaction();
-        List list = session.createQuery("from TaskEntity ").list();
-        int size = list.size();
-        for (int i = 1; i <= size; i++) {
-            TaskEntity task = session.find(TaskEntity.class, i);
-            task.setUser(null);
-            session.update(task);
-        }
+        session.createQuery("update TaskEntity set user.id=null ").executeUpdate();
         transaction.commit();
         session.close();
     }

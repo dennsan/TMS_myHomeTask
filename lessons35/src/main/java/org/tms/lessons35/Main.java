@@ -49,7 +49,7 @@ public class Main {
 
         taskService.findByUser("user1");
         ActiveTaskServiceImpl activeTaskService = new ActiveTaskServiceImpl();
-        activeTaskService.findByUser("in_progress");
+        activeTaskService.findByUser(Status.IN_PROGRESS);
 
         service.deleteAllUsers();
 
