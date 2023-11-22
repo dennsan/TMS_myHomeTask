@@ -7,6 +7,8 @@ import org.tms.lessons35.entity.TaskEntity;
 import org.tms.lessons35.entity.UserEntity;
 import org.tms.lessons35.service.UserService;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(UserEntity user) {
@@ -51,13 +53,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void findByID(int idUser) {
+    public UserEntity findByID(int idUser) {
         Session session = HibernateConfig.create();
         Transaction transaction = session.beginTransaction();
         UserEntity user = session.find(UserEntity.class, idUser);
         System.out.println(user);
         transaction.commit();
         session.close();
+        return user;
 
     }
 

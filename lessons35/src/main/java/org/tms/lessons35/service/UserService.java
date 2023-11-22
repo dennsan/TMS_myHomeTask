@@ -7,5 +7,5 @@ public interface UserService {
     public void updateUser(UserEntity user);
     public void deleteById(int id);
     public void deleteAllUsers();
-    public void findByID(int id);
+    public UserEntity findByID(int id);
 }
