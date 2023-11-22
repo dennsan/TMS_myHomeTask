@@ -4,9 +4,11 @@ import org.tms.lessons35.entity.TaskEntity;
 import org.tms.lessons35.entity.UserEntity;
 import org.tms.lessons35.enumerated.Status;
 
+import java.util.List;
+
 public interface TaskService {
     public void createTask(TaskEntity task, UserEntity user);
     public void updateTask(TaskEntity task, Status status);
-    public void findById(int id);
-    public void findByUser(String username);
+    public TaskEntity findById(int id);
+    public List<UserEntity> findByUser(String username);
 }

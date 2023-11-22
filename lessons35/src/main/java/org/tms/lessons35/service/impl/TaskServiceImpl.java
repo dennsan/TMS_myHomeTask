@@ -35,29 +35,28 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void findById(int idTask) {
+    public TaskEntity findById(int idTask) {
         Session session = HibernateConfig.create();
         Transaction transaction = session.beginTransaction();
-       TaskEntity task = session.find(TaskEntity.class, idTask);
-        System.out.println(task);
+        TaskEntity task = session.find(TaskEntity.class, idTask);
         transaction.commit();
         session.close();
+        return task;
     }
 
     @Override
-    public void findByUser(String username) {
+    public List<UserEntity> findByUser(String username) {
 
         Session session = HibernateConfig.create();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("select  title from TaskEntity where user.name =:username");
         query.setParameter("username", username);
         List resultList = query.getResultList();
-        System.out.println(resultList.toString());
 
         transaction.commit();
         session.close();
 
-
+        return resultList;
     }
 
 
