@@ -41,11 +41,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteAllUsers() {
-
-        setNullForUser();
-
         Session session = HibernateConfig.create();
         Transaction transaction = session.beginTransaction();
+        session.createQuery("update TaskEntity set user.id=null ")
+                .executeUpdate();
         session.createQuery("delete from UserEntity")
                 .executeUpdate();
         transaction.commit();
@@ -62,13 +61,5 @@ public class UserServiceImpl implements UserService {
         session.close();
         return user;
 
-    }
-
-    public void setNullForUser() {
-        Session session = HibernateConfig.create();
-        Transaction transaction = session.beginTransaction();
-        session.createQuery("update TaskEntity set user.id=null ").executeUpdate();
-        transaction.commit();
-        session.close();
     }
 }

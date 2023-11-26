@@ -8,7 +8,9 @@ import org.tms.lessons35.service.impl.ActiveTaskServiceImpl;
 import org.tms.lessons35.service.impl.TaskServiceImpl;
 import org.tms.lessons35.service.impl.UserServiceImpl;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -47,9 +49,18 @@ public class Main {
         taskService.createTask(task1,user);
         taskService.updateTask(task, Status.DONE);
 
-        taskService.findByUser("user1");
+        List<UserEntity> user1 = taskService.findByUser("user1");
+        Object[] array = user1.toArray();
+        for (Object item: array){
+            System.out.println( item);
+        }
+
         ActiveTaskServiceImpl activeTaskService = new ActiveTaskServiceImpl();
-        activeTaskService.findByUser(Status.IN_PROGRESS);
+        List<UserEntity> userList = activeTaskService.findByUser(Status.IN_PROGRESS);
+        Object[] userListArray = userList.toArray();
+        for (Object arr : userListArray) {
+            System.out.println(arr);
+        }
 
         service.deleteAllUsers();
 
