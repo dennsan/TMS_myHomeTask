@@ -26,7 +26,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Optional<FilmEntity> findByTitle(String title) {
+    public List<FilmEntity> findByTitle(String title) {
         return filmRepository.findByTitle(title);
     }
 

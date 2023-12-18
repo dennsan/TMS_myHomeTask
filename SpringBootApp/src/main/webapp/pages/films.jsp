@@ -10,9 +10,9 @@
 
     <br>
 
-${film.title}
+<%--${film.title}--%>
 
-<c:forEach items="${films}" var="movie">
+<c:forEach items="${film}" var="movie">
     <ul>
         <li>${movie.title}</li>
     </ul>

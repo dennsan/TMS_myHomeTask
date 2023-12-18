@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 
 @Controller
@@ -47,9 +49,10 @@ public class SpringBootController {
     }
 
     @GetMapping("/get_title")
-    public ModelAndView getByID(@RequestParam(name = "title", required = true) String title) {
+    public ModelAndView getByTitle(@RequestParam(name = "title", required = true) String title) {
         ModelAndView modelAndView = new ModelAndView("films");
-        service.findByTitle(title).ifPresent(film -> modelAndView.addObject("film", film));
+        var byTitle = service.findByTitle(title);
+        modelAndView.addObject("film", byTitle);
         return modelAndView;
     }
 }

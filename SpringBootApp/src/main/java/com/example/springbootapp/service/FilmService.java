@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface FilmService {
     List<FilmEntity> findAll();
     Optional<FilmEntity> findById(Integer id);
-    Optional<FilmEntity> findByTitle(String title);
+    List<FilmEntity> findByTitle(String title);
     void save(FilmEntity film);
 }
