@@ -8,8 +8,4 @@ public interface TaskService {
     void createTask(TaskEntity task);
 
     void updateTask(TaskEntity task, Status status);
-
-    void findById(int id);
-
-    void findByUser(String username);
 }

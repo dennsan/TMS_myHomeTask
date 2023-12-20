@@ -90,7 +90,7 @@ public class Main {
                 criteria.add(Restrictions.between("birthday",search.getFrom(),search.getTo()));
             }
                 criteria.createAlias("user.tasks", "task");
-                criteria.add(Restrictions.eq("user.tasks.status",search.getStatus()));
+                criteria.add(Restrictions.eq("task.status",search.getStatus()));
             }
 
 
