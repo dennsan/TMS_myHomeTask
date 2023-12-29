@@ -1,0 +1,13 @@
+spring:
+  mvc:
+    view:
+      prefix: /pages/
+      suffix: .jsp
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring_jpa
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
