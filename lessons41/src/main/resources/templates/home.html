@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border=1>
+    <th>Title</th>
+    <th>Genre</th>
+    <th>Age</th>
+    <th>Rating</th>
+    <tr th:each="f: ${films}">
+        <td th:text="${f.title}"></td>
+        <td th:text="${f.genre}"></td>
+        <td th:text="${f.age}"></td>
+        <td th:text="${f.rating}"></td>
+    </tr>
+</table>
+<hr>
+<p>Specification</p>
+<form th:action="@{/findFilm}" method="post" th:object="${searchDto}">
+    <input type="text" placeholder="please input title" th:field="*{title}"><br>
+    <select  th:field="*{genre}">
+        <option hidden selected value="">Select please</option>
+        <option th:each = "g:${genres}" th:value="${g.name()}">
+            [(${g.name()})]
+        </option>
+    </select>
+    <br>
+    <input type="text" placeholder="please input from rating" th:field="*{from}"><br>
+    <input type="text" placeholder="please input to rating" th:field="*{to}"><br>
+    <input type="submit" value="Find">
+</form>
+<hr>
+<div th:each="m : ${movies}">
+    [(${m.title})]
+</div>
+<p>Projection</p>
+<form th:action="@{/findAll}" method="post">
+    <input type="submit" value="FindAll">
+</form>
+<hr>
+<div th:each="item : ${proj}">
+    [(${item.getTitle()})] [(${item.getAge()})]
+</div>
+
+</body>
+</html>
