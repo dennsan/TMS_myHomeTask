@@ -1,0 +1,26 @@
+package com.example.springbootth.entity;
+
+import com.example.springbootth.enumerated.Genre;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+
+@Entity
+@Table(name = "films")
+public class FilmEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer id;
+    private String title;
+    private Integer age;
+    @Enumerated(EnumType.STRING)
+    private Genre genre;
+    private double rating;
+}
