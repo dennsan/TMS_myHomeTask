@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<form th:action="@{/save}" method="post" th:object="${film}">
+    <input type="text" th:field="*{title}"><br>
+    <input type="number" th:field="*{age}"><br>
+    <select th:field="*{genre}">
+        <option th:each="g:${genres}" th:value="${g.name()}" th:text="${g.name()}">
+        </option>
+    </select><br>
+    <input type="text" th:field="*{rating}"><br>
+    <input type="submit" value="Save">
+</form>
+    <hr>
+    <table border="1">
+        <th>Number</th>
+        <th>Title</th>
+        <th>Genre</th>
+        <th>Age</th>
+        <th>Rating</th>
+        <tr th:each="f:${films}">
+            <td th:value="${f.getId()}" th:text="${f.getId()}"></td>
+            <td th:value="${f.getTitle()}" th:text="${f.getTitle()}"></td>
+            <td th:value="${f.getGenre()}" th:text="${f.getGenre()}"></td>
+            <td th:value="${f.getAge()}" th:text="${f.getAge()}"></td>
+            <td th:value="${f.getRating()}" th:text="${f.getRating()}"></td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <form th:action="@{/update/{id}(id=${f.getId()})}" method="post" th:each="f, iter : ${films}">
+        <input type="text" name="newRating" th:value="${f.getRating} "><br>
+        <input type="submit" value="Update">
+    </form>
+
+</body>
+</html>
