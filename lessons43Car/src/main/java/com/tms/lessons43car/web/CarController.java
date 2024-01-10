@@ -15,12 +15,17 @@ public class CarController {
     private final CarService service;
 
     @PostMapping
-    public CarDto save(@RequestBody CarDto dto){
-       return service.save(dto);
+    public CarDto save(@RequestBody CarDto dto) {
+        return service.save(dto);
     }
 
     @GetMapping
-    public List<CarDto> find(){
+    public List<CarDto> find() {
         return service.getAll();
+    }
+
+    @PostMapping("/{id}")
+    public CarDto findById(@PathVariable(name = "id") Integer id) {
+        return service.findById(id);
     }
 }

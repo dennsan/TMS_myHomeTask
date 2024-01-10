@@ -1,7 +1,9 @@
 package com.tms.lessons43car.service.impl;
 
 import com.tms.lessons43car.dto.CarDto;
+import com.tms.lessons43car.exc.StoreFailedException;
 import com.tms.lessons43car.mapper.CarMapper;
+import com.tms.lessons43car.model.CarEntity;
 import com.tms.lessons43car.repository.CarRepository;
 import com.tms.lessons43car.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 
@@ -31,5 +34,12 @@ public class CarServiceImpl implements CarService {
         var carEntities = repository.findAll();
 
         return mapper.toDtos(carEntities);
+    }
+
+    @Override
+    public CarDto findById(Integer id) {
+        var byId = repository.findById(id)
+                .orElseThrow(() -> new StoreFailedException("car not found"));
+        return mapper.toDto(byId);
     }
 }
