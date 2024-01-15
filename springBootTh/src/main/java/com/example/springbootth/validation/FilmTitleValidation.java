@@ -5,7 +5,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.apache.commons.lang3.StringUtils;
 
-public class TitleValidation implements ConstraintValidator<CheckTitleNameValidation, FilmDto> {
+public class FilmTitleValidation implements ConstraintValidator<CheckTitleNameValidation, FilmDto> {
 
     @Override
     public boolean isValid(FilmDto film, ConstraintValidatorContext constraintValidatorContext) {

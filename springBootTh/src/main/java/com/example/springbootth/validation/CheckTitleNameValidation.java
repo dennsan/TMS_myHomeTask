@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = TitleValidation.class)
+@Constraint(validatedBy = FilmTitleValidation.class)
 public @interface CheckTitleNameValidation {
 
     String message() default "mast by filled and not start ";
