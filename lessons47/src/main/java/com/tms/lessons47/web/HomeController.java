@@ -11,4 +11,9 @@ public class HomeController {
     public String publicPage() {
         return "public";
     }
+
+    @GetMapping("/out")
+    public String out() {
+        return "out";
+    }
 }

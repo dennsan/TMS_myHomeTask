@@ -11,4 +11,9 @@ public class AuthorizationController {
     public String authorityPage() {
         return "authority";
     }
+
+    @GetMapping("/user")
+    public String user() {
+        return "user";
+    }
 }
