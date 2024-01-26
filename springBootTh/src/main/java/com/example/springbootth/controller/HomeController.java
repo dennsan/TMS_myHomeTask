@@ -1,9 +1,10 @@
 package com.example.springbootth.controller;
 
+import com.example.springbootth.dto.FilmDto;
 import com.example.springbootth.entity.FilmEntity;
 import com.example.springbootth.enumerated.Genre;
-import com.example.springbootth.repository.FilmRepository;
 import com.example.springbootth.service.impl.FilmServiceImpl;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,22 +19,21 @@ import java.util.List;
 @RequestMapping
 public class HomeController {
 
-    private final FilmRepository repository;
     private final FilmServiceImpl service;
-
 
     @GetMapping("/")
     public ModelAndView homePage(@ModelAttribute(name = "film") FilmEntity film) {
+
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("genres", Genre.values());
-        List<FilmEntity> allFilm = repository.findAll();
-        modelAndView.addObject("films", allFilm);
+        List<FilmDto> all = service.getAll();
+        modelAndView.addObject("films", all);
         return modelAndView;
     }
 
     @PostMapping("/save")
-    public String saveFilm(@ModelAttribute(name = "film") FilmEntity filmEntity) {
-        repository.save(filmEntity);
+    public String saveFilm(@Valid FilmDto dto) {
+        service.save(dto);
         return "redirect:/";
     }
 
